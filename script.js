@@ -43,6 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
         palette: 'vibrant'
     };
     let selectedColor = 'default';
+    
+    // Drag State
+    let isDragging = false;
+    let dragInitialMins = 0;
+    let dragStartMins = 0;
+    let dragEndMins = 0;
+    let dragDay = null;
+    let ghostElement = null;
 
     // Parse URL parameter if it exists
     const urlParams = new URLSearchParams(window.location.search);
@@ -282,9 +290,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     slot.dataset.time = timeString;
                     slot.dataset.day = d;
                     
-                    slot.addEventListener('click', (e) => {
-                        openModalForNew(d, timeString);
+                    slot.addEventListener('mousedown', (e) => {
+                        e.preventDefault(); // prevent text selection
+                        handleDragStart(d, timeString, dayCol);
                     });
+                    
+                    slot.addEventListener('mouseenter', (e) => {
+                        handleDragMove(d, timeString);
+                    });
+                    
+                    slot.addEventListener('touchstart', (e) => {
+                        // don't preventDefault so user can still scroll if not dragging immediately
+                        handleDragStart(d, timeString, dayCol);
+                    }, { passive: true });
+                    
+                    slot.addEventListener('touchmove', (e) => {
+                        if (isDragging) {
+                            e.preventDefault(); // prevent scroll while dragging
+                            const touch = e.touches[0];
+                            const el = document.elementFromPoint(touch.clientX, touch.clientY);
+                            if (el && el.classList.contains('time-slot')) {
+                                handleDragMove(parseInt(el.dataset.day, 10), el.dataset.time);
+                            }
+                        }
+                    }, { passive: false });
                     
                     dayCol.appendChild(slot);
                 }
@@ -293,26 +322,83 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Dragging Logic
+    function handleDragStart(dayIndex, timeString, dayColElement) {
+        isDragging = true;
+        dragDay = dayIndex;
+        dragInitialMins = timeToMins(timeString);
+        dragStartMins = dragInitialMins;
+        dragEndMins = dragInitialMins + 15;
+
+        ghostElement = document.createElement('div');
+        ghostElement.className = 'event event-ghost';
+        ghostElement.style.pointerEvents = 'none';
+        dayColElement.appendChild(ghostElement);
+        
+        updateGhostElement();
+    }
+
+    function handleDragMove(dayIndex, timeString) {
+        if (isDragging && dayIndex === dragDay) {
+            let hoverMins = timeToMins(timeString);
+            dragStartMins = Math.min(dragInitialMins, hoverMins);
+            dragEndMins = Math.max(dragInitialMins, hoverMins) + 15;
+            updateGhostElement();
+        }
+    }
+
+    function handleDragEnd() {
+        if (isDragging) {
+            isDragging = false;
+            
+            let startStr = minsToTime(dragStartMins);
+            let endStr = dragEndMins === dragInitialMins + 15 ? null : minsToTime(dragEndMins);
+            
+            openModalForNew(dragDay, startStr, endStr);
+        }
+    }
+
+    function updateGhostElement() {
+        if (!ghostElement) return;
+        const totalHours = config.endHour - config.startHour;
+        const configStartMins = config.startHour * 60;
+        
+        const topPos = ((dragStartMins - configStartMins) / (totalHours * 60)) * 100;
+        const height = ((dragEndMins - dragStartMins) / (totalHours * 60)) * 100;
+        
+        ghostElement.style.top = `${topPos}%`;
+        ghostElement.style.height = `${height}%`;
+        ghostElement.innerHTML = '';
+    }
+
+    document.addEventListener('mouseup', handleDragEnd);
+    document.addEventListener('touchend', handleDragEnd);
+    document.addEventListener('touchcancel', handleDragEnd);
+
     // Modal logic
-    function openModalForNew(dayIndex, startTime) {
+    function openModalForNew(dayIndex, startTime, endTime = null) {
         modalTitle.textContent = 'Nova rutina';
         inputId.value = '';
         inputTitle.value = '';
         inputDay.value = dayIndex;
         inputStart.value = startTime;
         
-        let [startH, startM] = startTime.split(':').map(Number);
-        let endH = startH + 1;
-        let endM = startM;
-        if (endH >= Math.min(24, config.endHour)) {
-            endH = Math.min(24, config.endHour);
-            endM = 0;
-            // if duration is 0 because they clicked on the very last hour
-            if (endH === startH && endM === startM) {
-                 endH = 24; 
+        if (endTime) {
+            inputEnd.value = endTime;
+        } else {
+            let [startH, startM] = startTime.split(':').map(Number);
+            let endH = startH + 1;
+            let endM = startM;
+            if (endH >= Math.min(24, config.endHour)) {
+                endH = Math.min(24, config.endHour);
+                endM = 0;
+                // if duration is 0 because they clicked on the very last hour
+                if (endH === startH && endM === startM) {
+                     endH = 24; 
+                }
             }
+            inputEnd.value = `${endH.toString().padStart(2, '0')}:${endM.toString().padStart(2, '0')}`;
         }
-        inputEnd.value = `${endH.toString().padStart(2, '0')}:${endM.toString().padStart(2, '0')}`;
         
         selectColor('default');
         btnDelete.style.display = 'none';
@@ -335,6 +421,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function closeModal() {
         modalOverlay.classList.remove('active');
+        if (ghostElement) {
+            ghostElement.remove();
+            ghostElement = null;
+        }
     }
 
     // Color picker logic
@@ -411,6 +501,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function timeToMins(timeStr) {
         const [h, m] = timeStr.split(':').map(Number);
         return h * 60 + m;
+    }
+
+    function minsToTime(mins) {
+        const h = Math.floor(mins / 60);
+        const m = mins % 60;
+        return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
     }
 
     function renderEvents() {

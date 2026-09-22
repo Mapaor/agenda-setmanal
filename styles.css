@@ -221,7 +221,13 @@ body {
 }
 
 .time-slot:hover {
-  background-color: var(--color-pill-gray);
+  background-color: var(--color-pill-default); /* Very subtle gray from palette */
+  border-radius: var(--border-radius);
+}
+
+.time-slot:active {
+  background-color: var(--color-pill-gray); /* Slightly more noticeable gray */
+  border-radius: var(--border-radius);
 }
 
 /* Events */
@@ -272,6 +278,16 @@ body {
 .event-time {
   font-size: 10px;
   opacity: 0.8;
+}
+
+.event-ghost {
+  pointer-events: none;
+  background-color: var(--color-pill-gray); /* Subtle gray */
+  border-radius: var(--border-radius);
+  box-shadow: none;
+  z-index: 20;
+  left: 0;
+  right: 0;
 }
 
 /* Dynamic color classes for events */
