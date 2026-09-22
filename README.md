@@ -9,5 +9,5 @@ Una web estàtica feta amb vanilla javascript i css que et permet dissenyar un h
 - Pots seleccionar quina franja horària es mostra
 - Pots compartir la teva rutina/agenda setmanal via URL (és un JSON codificat en base64 i afegit com a paràmetre a la query string)
 
-## Llicènia
+### Llicència
 MIT
