@@ -22,4 +22,8 @@
     width: calc(100vw - 32px);
     max-width: 300px;
   }
+  
+  #github-link {
+    display: none;
+  }
 }
