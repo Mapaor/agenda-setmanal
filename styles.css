@@ -85,9 +85,9 @@ body {
   color: #dc2626;
 }
 
-[data-theme="dark"] .btn-primary {
+/* [data-theme="dark"] .btn-primary { */
   /* Inherit the colors since var(--color-text-default) adapts automatically */
-}
+/* } */
 
 [data-theme="dark"] .btn-danger {
   color: #ef4444;
@@ -280,6 +280,7 @@ body {
   margin-bottom: 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
