@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnDelete = document.getElementById('btn-delete');
     const inputId = document.getElementById('event-id');
     const inputTitle = document.getElementById('event-name');
+    const inputDesc = document.getElementById('event-desc');
     const inputDay = document.getElementById('event-day');
     const inputStart = document.getElementById('event-start');
     const inputEnd = document.getElementById('event-end');
@@ -469,6 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalTitle.textContent = 'Nova rutina';
         inputId.value = '';
         inputTitle.value = '';
+        inputDesc.value = '';
         inputDay.value = dayIndex;
         inputStart.value = startTime;
         
@@ -499,6 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalTitle.textContent = 'Edita la rutina';
         inputId.value = event.id;
         inputTitle.value = event.title;
+        inputDesc.value = event.desc || '';
         inputDay.value = event.day;
         inputStart.value = event.start;
         inputEnd.value = event.end;
@@ -552,6 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const id = inputId.value || Date.now().toString();
         const title = inputTitle.value.trim();
+        const desc = inputDesc.value.trim();
         const day = parseInt(inputDay.value, 10);
         const start = inputStart.value;
         const end = inputEnd.value;
@@ -568,6 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const newEvent = {
             id,
             title,
+            desc,
             day,
             start,
             end,
@@ -639,8 +644,16 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (config.cellDesign === 'centered') {
                 eventEl.classList.add('event-centered');
-            } else if (durationMins >= 30) {
-                eventEl.appendChild(timeEl);
+            } else {
+                if (durationMins >= 30) {
+                    eventEl.appendChild(timeEl);
+                }
+                if (event.desc) {
+                    const descEl = document.createElement('div');
+                    descEl.className = 'event-desc';
+                    descEl.textContent = event.desc;
+                    eventEl.appendChild(descEl);
+                }
             }
 
             eventEl.addEventListener('mousedown', (e) => {
