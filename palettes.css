@@ -1,0 +1,315 @@
+:root {
+  /* Notion Light Palette */
+  --color-text-default: #37352F;
+  --color-bg-default: #FFFFFF;
+  --color-pill-default: rgba(206, 205, 202, 0.5);
+
+  --color-text-gray: #9B9A97;
+  --color-bg-gray: #EBECED;
+  --color-pill-gray: rgba(155, 154, 151, 0.4);
+
+  --color-text-brown: #64473A;
+  --color-bg-brown: #E9E5E3;
+  --color-pill-brown: rgba(140, 46, 0, 0.2);
+
+  --color-text-orange: #D9730D;
+  --color-bg-orange: #FAEBDD;
+  --color-pill-orange: rgba(245, 93, 0, 0.2);
+
+  --color-text-yellow: #DFAB01;
+  --color-bg-yellow: #FBF3DB;
+  --color-pill-yellow: rgba(233, 168, 0, 0.2);
+
+  --color-text-green: #0F7B6C;
+  --color-bg-green: #DDEDEA;
+  --color-pill-green: rgba(0, 135, 107, 0.2);
+
+  --color-text-blue: #0B6E99;
+  --color-bg-blue: #DDEBF1;
+  --color-pill-blue: rgba(0, 120, 223, 0.2);
+
+  --color-text-purple: #6940A5;
+  --color-bg-purple: #EAE4F2;
+  --color-pill-purple: rgba(103, 36, 222, 0.2);
+
+  --color-text-pink: #AD1A72;
+  --color-bg-pink: #F4DFEB;
+  --color-pill-pink: rgba(221, 0, 129, 0.2);
+
+  --color-text-red: #E03E3E;
+  --color-bg-red: #FBE4E4;
+  --color-pill-red: rgba(255, 0, 26, 0.2);
+
+  --border-color: rgba(55, 53, 47, 0.09);
+  --grid-line-color: rgba(55, 53, 47, 0.05);
+  --shadow-sm: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
+  --shadow-md: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+  
+  --ui-text-muted: #9B9A97;
+}
+
+[data-theme="dark"] {
+  /* Notion Dark Palette */
+  --color-text-default: rgba(255, 255, 255, 0.9);
+  --color-bg-default: #2F3437;
+  --color-pill-default: rgba(206, 205, 202, 0.5);
+
+  --color-text-gray: rgba(151, 154, 155, 0.95);
+  --color-bg-gray: #454B4E;
+  --color-pill-gray: rgba(151, 154, 155, 0.5);
+
+  --color-text-brown: #937264;
+  --color-bg-brown: #434040;
+  --color-pill-brown: rgba(147, 114, 100, 0.5);
+
+  --color-text-orange: #FFA344;
+  --color-bg-orange: #594A3A;
+  --color-pill-orange: rgba(255, 163, 68, 0.5);
+
+  --color-text-yellow: #FFDC49;
+  --color-bg-yellow: #59563B;
+  --color-pill-yellow: rgba(255, 220, 73, 0.5);
+
+  --color-text-green: #4DAB9A;
+  --color-bg-green: #354C4B;
+  --color-pill-green: rgba(77, 171, 154, 0.5);
+
+  --color-text-blue: #529CCA;
+  --color-bg-blue: #364954;
+  --color-pill-blue: rgba(82, 156, 202, 0.5);
+
+  --color-text-purple: #9A6DD7;
+  --color-bg-purple: #443F57;
+  --color-pill-purple: rgba(154, 109, 215, 0.5);
+
+  --color-text-pink: #E255A1;
+  --color-bg-pink: #533B4C;
+  --color-pill-pink: rgba(226, 85, 161, 0.5);
+
+  --color-text-red: #FF7369;
+  --color-bg-red: #594141;
+  --color-pill-red: rgba(255, 115, 105, 0.5);
+
+  --border-color: rgba(255, 255, 255, 0.09);
+  --grid-line-color: rgba(255, 255, 255, 0.05);
+  --shadow-sm: rgba(0, 0, 0, 0.2) 0px 0px 0px 1px, rgba(0, 0, 0, 0.3) 0px 2px 4px;
+  --shadow-md: rgba(0, 0, 0, 0.2) 0px 0px 0px 1px, rgba(0, 0, 0, 0.3) 0px 3px 6px, rgba(0, 0, 0, 0.4) 0px 9px 24px;
+  
+  --ui-text-muted: rgba(151, 154, 155, 0.95);
+}
+
+/* Pastel Palette */
+[data-palette="pastel"] {
+  --color-text-default: #333333; --color-bg-default: #FFFFFF; --color-pill-default: rgba(200, 200, 200, 0.5);
+  --color-text-gray: #555555; --color-bg-gray: #F0F0F0; --color-pill-gray: #E0E0E0;
+  --color-text-brown: #6b4c3a; --color-bg-brown: #f2e8e3; --color-pill-brown: #e6d8d1;
+  --color-text-orange: #d97706; --color-bg-orange: #fef3c7; --color-pill-orange: #fde68a;
+  --color-text-yellow: #ca8a04; --color-bg-yellow: #fef08a; --color-pill-yellow: #fde047;
+  --color-text-green: #16a34a; --color-bg-green: #dcfce7; --color-pill-green: #bbf7d0;
+  --color-text-blue: #2563eb; --color-bg-blue: #dbeafe; --color-pill-blue: #bfdbfe;
+  --color-text-purple: #9333ea; --color-bg-purple: #f3e8ff; --color-pill-purple: #e9d5ff;
+  --color-text-pink: #db2777; --color-bg-pink: #fce7f3; --color-pill-pink: #fbcfe8;
+  --color-text-red: #dc2626; --color-bg-red: #fee2e2; --color-pill-red: #fecaca;
+}
+
+[data-palette="pastel"][data-theme="dark"] {
+  --color-text-default: #f3f4f6; --color-bg-default: #1f2937; --color-pill-default: rgba(200, 200, 200, 0.5);
+  --color-text-gray: #d1d5db; --color-bg-gray: #374151; --color-pill-gray: #4b5563;
+  --color-text-brown: #f3e8e3; --color-bg-brown: #4a3f35; --color-pill-brown: #6b5c4d;
+  --color-text-orange: #fde68a; --color-bg-orange: #78350f; --color-pill-orange: #92400e;
+  --color-text-yellow: #fef08a; --color-bg-yellow: #713f12; --color-pill-yellow: #854d0e;
+  --color-text-green: #bbf7d0; --color-bg-green: #14532d; --color-pill-green: #166534;
+  --color-text-blue: #bfdbfe; --color-bg-blue: #1e3a8a; --color-pill-blue: #1e40af;
+  --color-text-purple: #e9d5ff; --color-bg-purple: #4c1d95; --color-pill-purple: #5b21b6;
+  --color-text-pink: #fbcfe8; --color-bg-pink: #831843; --color-pill-pink: #9d174d;
+  --color-text-red: #fecaca; --color-bg-red: #7f1d1d; --color-pill-red: #991b1b;
+}
+
+/* Vibrant Palette */
+[data-palette="vibrant"] {
+  --color-text-default: #111827; --color-bg-default: #FFFFFF; --color-pill-default: #e5e7eb;
+  --color-text-gray: #111827; --color-bg-gray: #d1d5db; --color-pill-gray: #9ca3af;
+  --color-text-brown: #fff; --color-bg-brown: #8B4513; --color-pill-brown: #A0522D;
+  --color-text-orange: #fff; --color-bg-orange: #f97316; --color-pill-orange: #ea580c;
+  --color-text-yellow: #111827; --color-bg-yellow: #facc15; --color-pill-yellow: #eab308;
+  --color-text-green: #fff; --color-bg-green: #22c55e; --color-pill-green: #16a34a;
+  --color-text-blue: #fff; --color-bg-blue: #3b82f6; --color-pill-blue: #2563eb;
+  --color-text-purple: #fff; --color-bg-purple: #a855f7; --color-pill-purple: #9333ea;
+  --color-text-pink: #fff; --color-bg-pink: #ec4899; --color-pill-pink: #db2777;
+  --color-text-red: #fff; --color-bg-red: #ef4444; --color-pill-red: #dc2626;
+}
+
+[data-palette="vibrant"][data-theme="dark"] {
+  --color-text-default: #f9fafb; --color-bg-default: #111827; --color-pill-default: #374151;
+  --color-text-gray: #f9fafb; --color-bg-gray: #4b5563; --color-pill-gray: #6b7280;
+  --color-text-brown: #fff; --color-bg-brown: #A0522D; --color-pill-brown: #CD853F;
+  --color-text-orange: #fff; --color-bg-orange: #ea580c; --color-pill-orange: #c2410c;
+  --color-text-yellow: #111827; --color-bg-yellow: #eab308; --color-pill-yellow: #ca8a04;
+  --color-text-green: #fff; --color-bg-green: #16a34a; --color-pill-green: #15803d;
+  --color-text-blue: #fff; --color-bg-blue: #2563eb; --color-pill-blue: #1d4ed8;
+  --color-text-purple: #fff; --color-bg-purple: #9333ea; --color-pill-purple: #7e22ce;
+  --color-text-pink: #fff; --color-bg-pink: #db2777; --color-pill-pink: #be185d;
+  --color-text-red: #fff; --color-bg-red: #dc2626; --color-pill-red: #b91c1c;
+}
+
+/* Autumn (Tardor) Palette */
+[data-palette="autumn"] {
+  --color-text-default: #432818; --color-bg-default: #FFFDF7; --color-pill-default: #EAE0D5;
+  --color-text-gray: #5E503F; --color-bg-gray: #E6E2DD; --color-pill-gray: #D5C7BC;
+  --color-text-brown: #FFF; --color-bg-brown: #A06A50; --color-pill-brown: #8C553D;
+  --color-text-orange: #FFF; --color-bg-orange: #E27344; --color-pill-orange: #CF5A2B;
+  --color-text-yellow: #432818; --color-bg-yellow: #E9C46A; --color-pill-yellow: #D1A848;
+  --color-text-green: #FFF; --color-bg-green: #6A994E; --color-pill-green: #527A3A;
+  --color-text-blue: #FFF; --color-bg-blue: #457B9D; --color-pill-blue: #325F7A;
+  --color-text-purple: #FFF; --color-bg-purple: #7D4F50; --color-pill-purple: #613A3B;
+  --color-text-pink: #432818; --color-bg-pink: #D8A48F; --color-pill-pink: #C48C75;
+  --color-text-red: #FFF; --color-bg-red: #BC4749; --color-pill-red: #9A3537;
+}
+
+[data-palette="autumn"][data-theme="dark"] {
+  --color-text-default: #FFFDF7; --color-bg-default: #283618; --color-pill-default: #394B24;
+  --color-text-gray: #E6E2DD; --color-bg-gray: #474036; --color-pill-gray: #5E564A;
+  --color-text-brown: #FFF; --color-bg-brown: #82533B; --color-pill-brown: #663F2B;
+  --color-text-orange: #FFF; --color-bg-orange: #B85022; --color-pill-orange: #913A14;
+  --color-text-yellow: #283618; --color-bg-yellow: #C19E4A; --color-pill-yellow: #9C7D36;
+  --color-text-green: #FFF; --color-bg-green: #4A7034; --color-pill-green: #375525;
+  --color-text-blue: #FFF; --color-bg-blue: #305872; --color-pill-blue: #214054;
+  --color-text-purple: #FFF; --color-bg-purple: #623939; --color-pill-purple: #4A2828;
+  --color-text-pink: #FFF; --color-bg-pink: #A87057; --color-pill-pink: #8B5740;
+  --color-text-red: #FFF; --color-bg-red: #943032; --color-pill-red: #732223;
+}
+
+/* Ocean (Oceà) Palette */
+[data-palette="ocean"] {
+  --color-text-default: #03045E; --color-bg-default: #F8FDFF; --color-pill-default: #E0F7FA;
+  --color-text-gray: #0077B6; --color-bg-gray: #CAF0F8; --color-pill-gray: #ADE8F4;
+  --color-text-brown: #FFF; --color-bg-brown: #B56576; --color-pill-brown: #9E5262;
+  --color-text-orange: #FFF; --color-bg-orange: #F77F00; --color-pill-orange: #D66E00;
+  --color-text-yellow: #03045E; --color-bg-yellow: #FFD166; --color-pill-yellow: #E6B54A;
+  --color-text-green: #FFF; --color-bg-green: #2A9D8F; --color-pill-green: #1F7A6F;
+  --color-text-blue: #FFF; --color-bg-blue: #00B4D8; --color-pill-blue: #0096B4;
+  --color-text-purple: #FFF; --color-bg-purple: #6930C3; --color-pill-purple: #53239E;
+  --color-text-pink: #03045E; --color-bg-pink: #FF99C8; --color-pill-pink: #E87CAF;
+  --color-text-red: #FFF; --color-bg-red: #D90429; --color-pill-red: #B50220;
+}
+
+[data-palette="ocean"][data-theme="dark"] {
+  --color-text-default: #E0FBFC; --color-bg-default: #0A1128; --color-pill-default: #1B2A4A;
+  --color-text-gray: #CAF0F8; --color-bg-gray: #12375C; --color-pill-gray: #1C4D82;
+  --color-text-brown: #FFF; --color-bg-brown: #8E4C5A; --color-pill-brown: #703844;
+  --color-text-orange: #FFF; --color-bg-orange: #C46200; --color-pill-orange: #9C4D00;
+  --color-text-yellow: #0A1128; --color-bg-yellow: #D9A844; --color-pill-yellow: #B58832;
+  --color-text-green: #FFF; --color-bg-green: #1D7066; --color-pill-green: #14534B;
+  --color-text-blue: #FFF; --color-bg-blue: #0087A3; --color-pill-blue: #00667D;
+  --color-text-purple: #FFF; --color-bg-purple: #4D2291; --color-pill-purple: #3A1773;
+  --color-text-pink: #0A1128; --color-bg-pink: #CC6D98; --color-pill-pink: #A8537A;
+  --color-text-red: #FFF; --color-bg-red: #A3021D; --color-pill-red: #7D0115;
+}
+
+/* Monochrome (Monocrom) Palette */
+[data-palette="monochrome"] {
+  --color-text-default: #111827; --color-bg-default: #FFFFFF; --color-pill-default: #E5E7EB;
+  --color-text-gray: #111827; --color-bg-gray: #F3F4F6; --color-pill-gray: #E5E7EB;
+  --color-text-brown: #111827; --color-bg-brown: #E5E7EB; --color-pill-brown: #D1D5DB;
+  --color-text-orange: #111827; --color-bg-orange: #D1D5DB; --color-pill-orange: #9CA3AF;
+  --color-text-yellow: #111827; --color-bg-yellow: #9CA3AF; --color-pill-yellow: #6B7280;
+  --color-text-green: #FFF; --color-bg-green: #6B7280; --color-pill-green: #4B5563;
+  --color-text-blue: #FFF; --color-bg-blue: #4B5563; --color-pill-blue: #374151;
+  --color-text-purple: #FFF; --color-bg-purple: #374151; --color-pill-purple: #1F2937;
+  --color-text-pink: #FFF; --color-bg-pink: #1F2937; --color-pill-pink: #111827;
+  --color-text-red: #FFF; --color-bg-red: #111827; --color-pill-red: #000000;
+}
+
+[data-palette="monochrome"][data-theme="dark"] {
+  --color-text-default: #F9FAFB; --color-bg-default: #000000; --color-pill-default: #1F2937;
+  --color-text-gray: #F9FAFB; --color-bg-gray: #111827; --color-pill-gray: #1F2937;
+  --color-text-brown: #F9FAFB; --color-bg-brown: #1F2937; --color-pill-brown: #374151;
+  --color-text-orange: #F9FAFB; --color-bg-orange: #374151; --color-pill-orange: #4B5563;
+  --color-text-yellow: #F9FAFB; --color-bg-yellow: #4B5563; --color-pill-yellow: #6B7280;
+  --color-text-green: #111827; --color-bg-green: #6B7280; --color-pill-green: #9CA3AF;
+  --color-text-blue: #111827; --color-bg-blue: #9CA3AF; --color-pill-blue: #D1D5DB;
+  --color-text-purple: #111827; --color-bg-purple: #D1D5DB; --color-pill-purple: #E5E7EB;
+  --color-text-pink: #111827; --color-bg-pink: #E5E7EB; --color-pill-pink: #F3F4F6;
+  --color-text-red: #111827; --color-bg-red: #F3F4F6; --color-pill-red: #FFFFFF;
+}
+
+/* Neon Palette */
+[data-palette="neon"] {
+  --color-text-default: #111827; --color-bg-default: #FFFFFF; --color-pill-default: #E5E7EB;
+  --color-text-gray: #111827; --color-bg-gray: #D1D5DB; --color-pill-gray: #9CA3AF;
+  --color-text-brown: #FFF; --color-bg-brown: #8B4513; --color-pill-brown: #A0522D;
+  --color-text-orange: #FFF; --color-bg-orange: #FF6600; --color-pill-orange: #FF8533;
+  --color-text-yellow: #111827; --color-bg-yellow: #FFFF00; --color-pill-yellow: #CCCC00;
+  --color-text-green: #111827; --color-bg-green: #39FF14; --color-pill-green: #32CD32;
+  --color-text-blue: #111827; --color-bg-blue: #00FFFF; --color-pill-blue: #00CED1;
+  --color-text-purple: #FFF; --color-bg-purple: #BC13FE; --color-pill-purple: #9B30FF;
+  --color-text-pink: #FFF; --color-bg-pink: #FF00FF; --color-pill-pink: #FF1493;
+  --color-text-red: #FFF; --color-bg-red: #FF3131; --color-pill-red: #DC143C;
+}
+
+[data-palette="neon"][data-theme="dark"] {
+  --color-text-default: #FFF; --color-bg-default: #09090B; --color-pill-default: #27272A;
+  --color-text-gray: #FFF; --color-bg-gray: #3F3F46; --color-pill-gray: #52525B;
+  --color-text-brown: #FFF; --color-bg-brown: #8B4513; --color-pill-brown: #A0522D;
+  --color-text-orange: #000; --color-bg-orange: #FF6600; --color-pill-orange: #CC5200;
+  --color-text-yellow: #000; --color-bg-yellow: #FFFF00; --color-pill-yellow: #CCCC00;
+  --color-text-green: #000; --color-bg-green: #39FF14; --color-pill-green: #00FF00;
+  --color-text-blue: #000; --color-bg-blue: #00FFFF; --color-pill-blue: #00BFFF;
+  --color-text-purple: #FFF; --color-bg-purple: #BC13FE; --color-pill-purple: #8A2BE2;
+  --color-text-pink: #000; --color-bg-pink: #FF00FF; --color-pill-pink: #FF69B4;
+  --color-text-red: #FFF; --color-bg-red: #FF3131; --color-pill-red: #FF0000;
+}
+
+/* Rock Palette */
+[data-palette="rock"] {
+  --color-text-default: #1A1A1A; --color-bg-default: #EAEAEA; --color-pill-default: #D4D4D4;
+  --color-text-gray: #FFF; --color-bg-gray: #525252; --color-pill-gray: #404040;
+  --color-text-brown: #FFF; --color-bg-brown: #4A3B32; --color-pill-brown: #362B24;
+  --color-text-orange: #FFF; --color-bg-orange: #A0522D; --color-pill-orange: #8B4513;
+  --color-text-yellow: #FFF; --color-bg-yellow: #B8860B; --color-pill-yellow: #996515;
+  --color-text-green: #FFF; --color-bg-green: #2F4F4F; --color-pill-green: #1C2F2F;
+  --color-text-blue: #FFF; --color-bg-blue: #27408B; --color-pill-blue: #1A2A5E;
+  --color-text-purple: #FFF; --color-bg-purple: #483D8B; --color-pill-purple: #352B6B;
+  --color-text-pink: #FFF; --color-bg-pink: #8B0A50; --color-pill-pink: #6E083F;
+  --color-text-red: #FFF; --color-bg-red: #8B0000; --color-pill-red: #660000;
+}
+
+[data-palette="rock"][data-theme="dark"] {
+  --color-text-default: #E0E0E0; --color-bg-default: #121212; --color-pill-default: #262626;
+  --color-text-gray: #FFF; --color-bg-gray: #404040; --color-pill-gray: #525252;
+  --color-text-brown: #FFF; --color-bg-brown: #362B24; --color-pill-brown: #4A3B32;
+  --color-text-orange: #FFF; --color-bg-orange: #8B4513; --color-pill-orange: #A0522D;
+  --color-text-yellow: #FFF; --color-bg-yellow: #996515; --color-pill-yellow: #B8860B;
+  --color-text-green: #FFF; --color-bg-green: #1C2F2F; --color-pill-green: #2F4F4F;
+  --color-text-blue: #FFF; --color-bg-blue: #1A2A5E; --color-pill-blue: #27408B;
+  --color-text-purple: #FFF; --color-bg-purple: #352B6B; --color-pill-purple: #483D8B;
+  --color-text-pink: #FFF; --color-bg-pink: #6E083F; --color-pill-pink: #8B0A50;
+  --color-text-red: #FFF; --color-bg-red: #660000; --color-pill-red: #8B0000;
+}
+
+/* Studio Ghibli Palette */
+[data-palette="ghibli"] {
+  --color-text-default: #3D4035; --color-bg-default: #FDF9EC; --color-pill-default: #EAE6D9;
+  --color-text-gray: #FFF; --color-bg-gray: #8A8F8A; --color-pill-gray: #777D77;
+  --color-text-brown: #FFF; --color-bg-brown: #8A634E; --color-pill-brown: #73513F;
+  --color-text-orange: #FFF; --color-bg-orange: #E88359; --color-pill-orange: #CF6F46;
+  --color-text-yellow: #3D4035; --color-bg-yellow: #E8C15A; --color-pill-yellow: #CFAC4B;
+  --color-text-green: #FFF; --color-bg-green: #608F5F; --color-pill-green: #4D754C;
+  --color-text-blue: #FFF; --color-bg-blue: #6B95AB; --color-pill-blue: #557A8F;
+  --color-text-purple: #FFF; --color-bg-purple: #817296; --color-pill-purple: #6B5E7D;
+  --color-text-pink: #FFF; --color-bg-pink: #D4888D; --color-pill-pink: #BA7378;
+  --color-text-red: #FFF; --color-bg-red: #B34439; --color-pill-red: #94362D;
+}
+
+[data-palette="ghibli"][data-theme="dark"] {
+  --color-text-default: #FDF9EC; --color-bg-default: #2C3028; --color-pill-default: #3D4035;
+  --color-text-gray: #FFF; --color-bg-gray: #6B706B; --color-pill-gray: #5A5E5A;
+  --color-text-brown: #FFF; --color-bg-brown: #5E4131; --color-pill-brown: #4A3225;
+  --color-text-orange: #FFF; --color-bg-orange: #AB5B3A; --color-pill-orange: #8F492E;
+  --color-text-yellow: #2C3028; --color-bg-yellow: #B59543; --color-pill-yellow: #967B34;
+  --color-text-green: #FFF; --color-bg-green: #426341; --color-pill-green: #314A30;
+  --color-text-blue: #FFF; --color-bg-blue: #446273; --color-pill-blue: #334A57;
+  --color-text-purple: #FFF; --color-bg-purple: #5A4E6B; --color-pill-purple: #463C54;
+  --color-text-pink: #FFF; --color-bg-pink: #965B60; --color-pill-pink: #7A474C;
+  --color-text-red: #FFF; --color-bg-red: #802E25; --color-pill-red: #66231C;
+}
