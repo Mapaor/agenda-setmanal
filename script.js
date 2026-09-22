@@ -51,6 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let dragEndMins = 0;
     let dragDay = null;
     let ghostElement = null;
+    
+    // Drag Event State (Alt+Drag duplicate)
+    let isDraggingEvent = false;
+    let draggedEventData = null;
+    let draggedEventGhost = null;
+    let dragTargetDay = null;
+    let dragTargetStartMins = null;
+    let draggedDurationMins = 0;
+    let preventEventClick = false;
 
     // Parse URL parameter if it exists
     const urlParams = new URLSearchParams(window.location.search);
@@ -375,6 +384,86 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('touchend', handleDragEnd);
     document.addEventListener('touchcancel', handleDragEnd);
 
+    // Event Duplication Logic (Alt+Drag)
+    document.addEventListener('mousemove', (e) => {
+        if (isDraggingEvent) {
+            const el = document.elementFromPoint(e.clientX, e.clientY);
+            let timeSlot = el ? el.closest('.time-slot') : null;
+            if (timeSlot) {
+                const day = parseInt(timeSlot.dataset.day, 10);
+                const timeString = timeSlot.dataset.time;
+                
+                let startMins = timeToMins(timeString);
+                
+                // Prevent dragging past end hour
+                const maxStartMins = (config.endHour * 60) - draggedDurationMins;
+                if (startMins > maxStartMins) {
+                    startMins = maxStartMins;
+                }
+                
+                dragTargetDay = day;
+                dragTargetStartMins = startMins;
+                
+                const dayCol = document.querySelector(`.day-column[data-day="${day}"]`);
+                if (dayCol) {
+                    if (draggedEventGhost.parentElement !== dayCol) {
+                        if (draggedEventGhost.parentElement) {
+                            draggedEventGhost.parentElement.removeChild(draggedEventGhost);
+                        }
+                        dayCol.appendChild(draggedEventGhost);
+                    }
+                    
+                    const totalHours = config.endHour - config.startHour;
+                    const configStartMins = config.startHour * 60;
+                    const topPos = ((dragTargetStartMins - configStartMins) / (totalHours * 60)) * 100;
+                    const height = (draggedDurationMins / (totalHours * 60)) * 100;
+                    
+                    draggedEventGhost.style.top = `${topPos}%`;
+                    draggedEventGhost.style.height = `${height}%`;
+                    
+                    let endMins = dragTargetStartMins + draggedDurationMins;
+                    draggedEventGhost.innerHTML = `<div class="event-title">${draggedEventData.title}</div><div class="event-time">${minsToTime(dragTargetStartMins)} - ${minsToTime(endMins)}</div>`;
+                }
+            }
+        }
+    });
+
+    function handleEventDragEnd() {
+        if (isDraggingEvent) {
+            isDraggingEvent = false;
+            
+            if (draggedEventGhost) {
+                draggedEventGhost.remove();
+                draggedEventGhost = null;
+            }
+            
+            if (dragTargetDay !== null && dragTargetStartMins !== null) {
+                const endMins = dragTargetStartMins + draggedDurationMins;
+                const newEvent = {
+                    id: Date.now().toString(),
+                    title: draggedEventData.title,
+                    day: dragTargetDay,
+                    start: minsToTime(dragTargetStartMins),
+                    end: minsToTime(endMins),
+                    color: draggedEventData.color
+                };
+                
+                events.push(newEvent);
+                saveEvents();
+                renderEvents();
+            }
+            
+            draggedEventData = null;
+            dragTargetDay = null;
+            dragTargetStartMins = null;
+            
+            // Keep preventEventClick for a brief moment to block the subsequent click event
+            setTimeout(() => { preventEventClick = false; }, 100);
+        }
+    }
+
+    document.addEventListener('mouseup', handleEventDragEnd);
+
     // Modal logic
     function openModalForNew(dayIndex, startTime, endTime = null) {
         modalTitle.textContent = 'Nova rutina';
@@ -554,8 +643,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 eventEl.appendChild(timeEl);
             }
 
+            eventEl.addEventListener('mousedown', (e) => {
+                if (e.altKey) {
+                    e.preventDefault(); // prevent text selection
+                    e.stopPropagation(); // prevent grid slot mousedown
+                    preventEventClick = true;
+                    
+                    isDraggingEvent = true;
+                    draggedEventData = event;
+                    draggedDurationMins = durationMins;
+                    
+                    draggedEventGhost = document.createElement('div');
+                    draggedEventGhost.className = 'event event-ghost';
+                    // The ghost will be appended to the correct dayCol on the first mousemove
+                }
+            });
+
             eventEl.addEventListener('click', (e) => {
                 e.stopPropagation();
+                if (preventEventClick || e.altKey) {
+                    preventEventClick = false;
+                    return;
+                }
                 openModalForEdit(event);
             });
 

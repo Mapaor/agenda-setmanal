@@ -7,6 +7,8 @@ Una web estàtica feta amb vanilla javascript i css que et permet dissenyar un h
 - Disseny adaptat per diferents mides de pantalles
 - Pots amagar o mostrar el cap de setmana
 - Pots seleccionar quina franja horària es mostra
+- Pots crear un element d'una duració concreta arrossegant i deixant anar
+- Pots duplicar un element amb Alt+Click i arrossegant-lo (similar a com faries a Photoshop, Premiere, Davinci, etc.)
 - Pots compartir la teva rutina/agenda setmanal via URL (és un JSON codificat en base64 i afegit com a paràmetre a la query string)
 
 ### Llicència
