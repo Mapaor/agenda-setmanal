@@ -67,10 +67,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const sharedData = urlParams.get('data');
     if (sharedData) {
         try {
-            const parsedData = JSON.parse(decodeURIComponent(atob(sharedData)));
+            let jsonStr = null;
+            if (window.LZString) {
+                jsonStr = LZString.decompressFromEncodedURIComponent(sharedData);
+            }
+            if (!jsonStr) {
+                try {
+                    jsonStr = decodeURIComponent(atob(sharedData));
+                } catch (err) {
+                    // fall through
+                }
+            }
+            const parsedData = JSON.parse(jsonStr);
             if (parsedData.config && Array.isArray(parsedData.events)) {
-                config = parsedData.config;
-                events = parsedData.events;
+                config = {
+                    startHour: parsedData.config.sh !== undefined ? parsedData.config.sh : (parsedData.config.startHour || 6),
+                    endHour: parsedData.config.eh !== undefined ? parsedData.config.eh : (parsedData.config.endHour || 24),
+                    hideWeekend: parsedData.config.hw !== undefined ? parsedData.config.hw : (parsedData.config.hideWeekend || false),
+                    cellDesign: parsedData.config.cd !== undefined ? parsedData.config.cd : (parsedData.config.cellDesign || 'default'),
+                    palette: parsedData.config.p !== undefined ? parsedData.config.p : (parsedData.config.palette || 'vibrant')
+                };
+                
+                events = parsedData.events.map((ev, index) => {
+                    return {
+                        id: ev.id || (Date.now() + index).toString() + Math.random().toString(36).substring(2, 6),
+                        title: ev.t !== undefined ? ev.t : ev.title,
+                        day: ev.d !== undefined ? ev.d : ev.day,
+                        start: ev.s !== undefined ? ev.s : ev.start,
+                        end: ev.e !== undefined ? ev.e : ev.end,
+                        color: ev.c !== undefined ? ev.c : ev.color,
+                        desc: ev.x !== undefined ? ev.x : (ev.desc || '')
+                    };
+                });
+                
                 localStorage.setItem('agenda-config', JSON.stringify(config));
                 localStorage.setItem('agenda-events', JSON.stringify(events));
             }
@@ -129,15 +158,29 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const minConfig = {
+            sh: config.startHour,
+            eh: config.endHour,
+            hw: config.hideWeekend,
+            cd: config.cellDesign,
+            p: config.palette
+        };
+        
+        const minEvents = events.map(e => {
+            const minE = { t: e.title, d: e.day, s: e.start, e: e.end, c: e.color };
+            if (e.desc) minE.x = e.desc;
+            return minE;
+        });
+
         const dataToShare = {
-            config: config,
-            events: events
+            config: minConfig,
+            events: minEvents
         };
         const jsonStr = JSON.stringify(dataToShare);
-        const base64Str = btoa(encodeURIComponent(jsonStr));
+        const encodedStr = window.LZString ? LZString.compressToEncodedURIComponent(jsonStr) : btoa(encodeURIComponent(jsonStr));
         
         const url = new URL(window.location);
-        url.searchParams.set('data', base64Str);
+        url.searchParams.set('data', encodedStr);
         
         shareUrlInput.value = url.toString();
         sharePopup.classList.add('active');
